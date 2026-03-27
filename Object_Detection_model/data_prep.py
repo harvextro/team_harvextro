@@ -77,3 +77,6 @@ for split in ["train", "valid", "test"]:
     stats[split] = {"images": n_imgs, "boxes": n_boxes}
     print(f"  {split}: {n_imgs} images, {n_boxes} boxes")
 
+print("\n\u2705 Dataset converted to YOLOv8 format")
+print("Stats:", stats)
+
