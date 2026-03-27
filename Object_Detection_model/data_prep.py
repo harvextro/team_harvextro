@@ -89,3 +89,7 @@ yaml_cfg = {
     "nc"   : len(CLASSES),
     "names": CLASSES
 }
+yaml_path = f"{OUTPUT_ROOT}/dataset.yaml"
+with open(yaml_path, "w") as f:
+    yaml.dump(yaml_cfg, f, default_flow_style=False)
+
