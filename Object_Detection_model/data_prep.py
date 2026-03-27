@@ -51,3 +51,8 @@ def convert_annotation(txt_path: str, img_path: str, out_path: str) -> int:
             bw = (x2 - x1) / W
             bh = (y2 - y1) / H
             lines_out.append(f"{cls} {cx:.6f} {cy:.6f} {bw:.6f} {bh:.6f}")
+
+     with open(out_path, "w") as f:
+        f.write("\n".join(lines_out))
+    return len(lines_out)
+
