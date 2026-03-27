@@ -1,0 +1,2 @@
+# Install all dependencies
+!pip install ultralytics tensorflow opencv-python matplotlib seaborn pandas pillow pyyaml tqdm --quiet
