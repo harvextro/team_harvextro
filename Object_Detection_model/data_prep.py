@@ -94,3 +94,4 @@ with open(yaml_path, "w") as f:
     yaml.dump(yaml_cfg, f, default_flow_style=False)
 
 print("dataset.yaml contents:")
+print(open(yaml_path).read())
