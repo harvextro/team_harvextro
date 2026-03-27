@@ -14,3 +14,40 @@ print("✅ Output directories ready")
 print(f"   {OUTPUT_ROOT}/")
 for s in ["train","valid","test"]:
     print(f"   ├─ {s}/images/  &  {s}/labels/")
+
+
+# ─── ANNOTATION FORMAT CONVERTER ────────────────────────────────
+# Source format (Darknet Keras / Roboflow):
+#   <filename> x1,y1,x2,y2,class_id   (absolute pixel coords)
+# Target format (YOLOv8):
+#   class_id cx cy w h                 (normalised 0-1)
+
+def convert_annotation(txt_path: str, img_path: str, out_path: str) -> int:
+    """Convert one annotation file. Returns number of boxes written."""
+    try:
+        img = Image.open(img_path)
+        W, H = img.size
+    except Exception:
+        return 0
+
+    lines_out = []
+    with open(txt_path) as f:
+        for line in f:
+            line = line.strip()          # strips \r\n, \n, spaces
+            if not line:
+                continue
+            parts = line.split()
+            # last token is coords; first token may be filename
+            coords_str = parts[-1] if len(parts) > 1 else parts[0]
+            if coords_str.endswith(".jpg") or coords_str.endswith(".png"):
+                continue                 # line is filename only, skip
+            try:
+                x1, y1, x2, y2, cls = map(int, coords_str.split(","))
+            except ValueError as e:
+                print(f"  \u26a0\ufe0f  Parse error in {txt_path}: {repr(coords_str)} \u2192 {e}")
+                continue
+            cx = ((x1 + x2) / 2) / W
+            cy = ((y1 + y2) / 2) / H
+            bw = (x2 - x1) / W
+            bh = (y2 - y1) / H
+            lines_out.append(f"{cls} {cx:.6f} {cy:.6f} {bw:.6f} {bh:.6f}")
