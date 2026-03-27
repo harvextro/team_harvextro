@@ -80,3 +80,12 @@ for split in ["train", "valid", "test"]:
 print("\n\u2705 Dataset converted to YOLOv8 format")
 print("Stats:", stats)
 
+# ─── WRITE dataset.yaml ─────────────────────────────────────────
+yaml_cfg = {
+    "path" : OUTPUT_ROOT,
+    "train": "train/images",
+    "val"  : "valid/images",
+    "test" : "test/images",
+    "nc"   : len(CLASSES),
+    "names": CLASSES
+}
