@@ -56,3 +56,24 @@ def convert_annotation(txt_path: str, img_path: str, out_path: str) -> int:
         f.write("\n".join(lines_out))
     return len(lines_out)
 
+# ─── COPY + CONVERT ALL SPLITS ──────────────────────────────────
+stats = {}
+for split in ["train", "valid", "test"]:
+    src_dir = Path(DATASET_ROOT) / split
+    if not src_dir.exists():
+        print(f"\u26a0\ufe0f  {split}/ not found \u2013 skipping")
+        continue
+    imgs = list(src_dir.glob("*.jpg")) + list(src_dir.glob("*.png"))
+    n_imgs, n_boxes = 0, 0
+    for img_path in tqdm(imgs, desc=split):
+        stem = img_path.stem
+        txt_path = src_dir / f"{stem}.txt"
+        dst_img  = f"{OUTPUT_ROOT}/{split}/images/{img_path.name}"
+        dst_lbl  = f"{OUTPUT_ROOT}/{split}/labels/{stem}.txt"
+        shutil.copy(img_path, dst_img)
+        if txt_path.exists():
+            n_boxes += convert_annotation(str(txt_path), str(img_path), dst_lbl)
+        n_imgs += 1
+    stats[split] = {"images": n_imgs, "boxes": n_boxes}
+    print(f"  {split}: {n_imgs} images, {n_boxes} boxes")
+
