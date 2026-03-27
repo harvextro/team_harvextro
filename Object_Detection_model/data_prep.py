@@ -9,3 +9,8 @@ CLASSES = ["green_chili", "red_chili", "yellow_chili"]  # must match _classes.tx
 for split in ["train", "valid", "test"]:
     for sub in ["images", "labels"]:
         Path(f"{OUTPUT_ROOT}/{split}/{sub}").mkdir(parents=True, exist_ok=True)
+
+print("✅ Output directories ready")
+print(f"   {OUTPUT_ROOT}/")
+for s in ["train","valid","test"]:
+    print(f"   ├─ {s}/images/  &  {s}/labels/")
