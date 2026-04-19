@@ -11,3 +11,9 @@ else:
     print(f"❌ Error: Model not found at {model_path}")
     # Tip: Run !ls /kaggle/working/harvextro_yolov8/runs/ to find your folder name
     model = None
+
+# 3. GET IMAGES
+image_paths = glob.glob(image_folder)[:10]
+
+if not image_paths:
+    print("❌ No images found. Check your /kaggle/input/ path!")
