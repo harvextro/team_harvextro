@@ -1,0 +1,7 @@
+# ─── CONFIGURE PATHS ────────────────────────────────────────────
+# Define source and destination paths
+DATASET_ROOT = "/kaggle/input/datasets/dilniwijesinghe/scotchbonnet-chilli/Data_Set"
+OUTPUT_ROOT  = "/kaggle/working/harvextro_yolov8"
+
+# Define ripeness classes
+CLASSES = ["green_chili", "red_chili", "yellow_chili"]  # must match _classes.txt order
