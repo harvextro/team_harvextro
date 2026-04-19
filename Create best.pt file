@@ -8,3 +8,10 @@ if weight_files:
     
  # 2. Load the model using the discovered path
     model = YOLO(latest_weights)
+
+ # 3. Run validation
+    # Use the yaml_path variable we defined earlier
+    metrics = model.val(data=yaml_path, split='test')
+    print("✨ Validation successful!")
+else:
+    print("❌ Error: 'best.pt' not found. Did you finish the training cell?")
