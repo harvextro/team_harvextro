@@ -1,0 +1,15 @@
+# ─── 1. TRAINING PERFORMANCE DASHBOARD ───────────────────────────
+# This section generates scientific graphs showing how the model's 
+# accuracy improved and error (loss) decreased over time.
+
+# Point directly to the directory where YOLO saved the results.csv
+training_run_path = Path(OUTPUT_ROOT) / "runs" / RUN_NAME
+results_csv = training_run_path / "results.csv"
+
+if results_csv.exists():
+    # Load logs and clean column names for plotting
+    df = pd.read_csv(results_csv)
+    df.columns = df.columns.str.strip()
+
+    fig, axes = plt.subplots(2, 3, figsize=(16, 9))
+    fig.suptitle("YOLOv8 Training Dashboard — HarveXtro", fontsize=15, fontweight="bold")
