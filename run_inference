@@ -17,3 +17,20 @@ image_paths = glob.glob(image_folder)[:10]
 
 if not image_paths:
     print("❌ No images found. Check your /kaggle/input/ path!")
+
+# 4. RUN DETECTION
+if model and image_paths:
+    for img_path in image_paths:
+        results = model(img_path)
+        
+        # results[0].plot() returns a BGR image (OpenCV style)
+        im_array = results[0].plot()
+
+        # Convert BGR to RGB so colors look correct in Matplotlib
+        im_rgb = cv2.cvtColor(im_array, cv2.COLOR_BGR2RGB)
+
+        plt.figure(figsize=(10, 6))
+        plt.imshow(im_rgb) 
+        plt.title(f"Prediction: {os.path.basename(img_path)}")
+        plt.axis('off')
+        plt.show()
