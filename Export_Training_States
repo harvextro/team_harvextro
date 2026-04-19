@@ -12,3 +12,9 @@ if results_source.exists():
     # 2. Copy to the root for easy download from the Kaggle sidebar
     shutil.copy(results_source, results_destination)
     print(f"📂 Stats exported to: {results_destination}")
+
+     # 3. Preview the final metrics
+    print("\n--- Final Epoch Summary ---")
+    print(df.tail(1)[['metrics/mAP50(B)', 'metrics/precision(B)', 'metrics/recall(B)']])
+else:
+    print("❌ CSV not found. Ensure the training cell has finished running.")
