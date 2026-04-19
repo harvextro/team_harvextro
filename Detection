@@ -8,3 +8,12 @@ try:
 except Exception as e:
     print(f"❌ Still can't find the file. Error: {e}")
     print("Tip: Check the 'Data' tab on the right to see the exact folder name.")
+
+# 2. GET TEST IMAGES
+# We use the test images from your harvextro dataset
+test_images_path = "/kaggle/working/harvextro_yolov8/test/images/*.jpg"
+test_images = glob.glob(test_images_path)[:10]
+
+if not test_images:
+    print("❌ No test images found in the path!")
+
