@@ -32,3 +32,16 @@ print(f"  Recall         : {metrics.box.mr:.4f}")
 print("\n--- Per-Class Analysis ---")
 for i, cls in enumerate(CLASSES):
     print(f"  [{cls:15s}]  AP50: {metrics.box.ap50[i]:.4f}")
+
+# ─── INFERENCE TEST ─────────────────────────────────────────────
+test_images = list((Path(OUTPUT_ROOT) / "test" / "images").glob("*.jpg"))[:5]
+
+if test_images:
+    results_list = best_model.predict(
+        source  = test_images,
+        conf    = 0.25,
+        imgsz   = IMG_SIZE,
+        save    = True,
+        project = f"{OUTPUT_ROOT}/runs",
+        name    = f"{RUN_NAME}_predict",
+    )
