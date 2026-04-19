@@ -22,3 +22,13 @@ metrics = best_model.val(
     project = f"{OUTPUT_ROOT}/runs",
     name    = f"{RUN_NAME}_eval",
 )
+
+# ─── PERFORMANCE REPORT ─────────────────────────────────────────
+print("\n" + "═"*25 + " HARVEXTRO PERFORMANCE REPORT " + "═"*25)
+print(f"  Overall mAP@50 : {metrics.box.map50:.4f}")
+print(f"  Precision      : {metrics.box.mp:.4f}")
+print(f"  Recall         : {metrics.box.mr:.4f}")
+
+print("\n--- Per-Class Analysis ---")
+for i, cls in enumerate(CLASSES):
+    print(f"  [{cls:15s}]  AP50: {metrics.box.ap50[i]:.4f}")
