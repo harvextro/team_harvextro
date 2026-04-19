@@ -8,3 +8,7 @@ if results_source.exists():
     # 1. Load to verify the data
     df = pd.read_csv(results_source)
     print(f"✅ Success! Training logs found for {len(df)} epochs.")
+
+    # 2. Copy to the root for easy download from the Kaggle sidebar
+    shutil.copy(results_source, results_destination)
+    print(f"📂 Stats exported to: {results_destination}")
