@@ -20,4 +20,10 @@ results = model.train(
     hsv_s=0.4,   # Don't make the yellow too saturated (which looks red)
     hsv_v=0.3,   # Keep brightness realistic
     
+    # 3. Optimizer: AdamW is often better for fine details than the default
+    optimizer='AdamW',
+    
+    project=f"{OUTPUT_ROOT}/runs",
+    name="harvextro_final_v1"
+) 
 
