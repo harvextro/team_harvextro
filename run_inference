@@ -1,0 +1,5 @@
+# 1. FIX THE PATHS
+# Use the find command or check your output folder for the correct path
+model_path = '/kaggle/working/harvextro_yolov8/runs/harvextro_final_v1-2/weights/best.pt'
+image_folder = '/kaggle/input/datasets/dilniwijesinghe/scotchbonnet-chilli/Data_Set/test/*.jpg'
+
