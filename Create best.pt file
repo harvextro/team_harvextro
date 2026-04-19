@@ -1,0 +1,8 @@
+# 1. Search for any 'best.pt' file in your working directory
+weight_files = list(Path('/kaggle/working').rglob('best.pt'))
+
+if weight_files:
+    # Use the most recent one found
+    latest_weights = str(weight_files[-1])
+    print(f"✅ Found weights at: {latest_weights}")
+    
