@@ -10,3 +10,15 @@ yaml_path = f"{OUTPUT_ROOT}/dataset.yaml"
 RUN_NAME = "harvextro_final_v1_2" # Name for this evaluation run
 IMG_SIZE = 640 
 CLASSES = ['green_chili', 'red_chili', 'yellow_chili']
+
+# ─── EVALUATE on TEST SET ───────────────────────────────────────
+metrics = best_model.val(
+    data    = yaml_path,
+    split   = "test",
+    imgsz   = IMG_SIZE,
+    conf    = 0.25,
+    iou     = 0.45,
+    plots   = True,
+    project = f"{OUTPUT_ROOT}/runs",
+    name    = f"{RUN_NAME}_eval",
+)
