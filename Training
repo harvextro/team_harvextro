@@ -7,4 +7,10 @@ results = model.train(
     imgsz=640,            # Higher resolution helps the model see texture
     batch=16,
     
- 
+   # --- SPECIAL FIXES FOR COLOR CONFUSION ---
+    
+    # 1. Label Smoothing: Tells the model "Don't be 100% sure." 
+    # This stops it from over-confidently picking Red when it might be Yellow.
+    label_smoothing=0.1, 
+    
+  
