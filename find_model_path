@@ -1,0 +1,5 @@
+import os
+
+# Search for the best.pt file automatically
+for root, dirs, files in os.walk('/kaggle/working/'):
+    for file in files:
