@@ -17,3 +17,14 @@ test_images = glob.glob(test_images_path)[:10]
 if not test_images:
     print("❌ No test images found in the path!")
 
+# 3. RUN DETECTION AND VISUALIZE
+for img_path in test_images:
+    # Run the model
+    # imgsz=640 matches the complex training we set up earlier
+    results = model.predict(source=img_path, conf=0.25, imgsz=640)
+
+# Process the image for display
+    res_plotted = results[0].plot()
+    res_rgb = cv2.cvtColor(res_plotted, cv2.COLOR_BGR2RGB)
+
+
