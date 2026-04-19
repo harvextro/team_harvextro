@@ -3,3 +3,11 @@
 print("═" * 45)
 print(f"{'CATEGORY':<15} | {'PRECISION':<10} | {'RECALL':<10} | {'F1'}")
 print("─" * 45)
+
+# 1. Detailed Per-Class Breakdown
+# This shows exactly which ripeness stage the model handles best
+for i, cls in enumerate(CLASSES):
+    p = metrics.box.p[i]
+    r = metrics.box.r[i]
+    f1_cls = 2 * (p * r) / (p + r + 1e-6)
+    print(f"{cls:<15} | {p:<10.2%} | {r:<10.2%} | {f1_cls:.4f}")
