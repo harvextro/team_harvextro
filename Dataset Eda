@@ -1,7 +1,9 @@
 # ─── DATASET EDA ────────────────────────────────────────────────
+# Initialize counters
 class_counts = {c: 0 for c in CLASSES}
 wh_ratios = []
 
+# Scan all labels in train, valid, and test
 for split in ["train", "valid", "test"]:
     lbl_dir = Path(OUTPUT_ROOT) / split / "labels"
     for lbl in lbl_dir.glob("*.txt"):
@@ -10,29 +12,36 @@ for split in ["train", "valid", "test"]:
             if len(parts) == 5:
                 cls_id = int(parts[0])
                 class_counts[CLASSES[cls_id]] += 1
-                wh_ratios.append(float(parts[3]) / float(parts[4]))
+                
+                # Calculate width/height ratio to check box shapes
+                w, h = float(parts[3]), float(parts[4])
+                if h > 0: # Safety check to avoid division by zero
+                    wh_ratios.append(w / h)
 
-
+# 6.1 VISUALIZATION
 fig, axes = plt.subplots(1, 2, figsize=(13, 4))
-fig.suptitle("Dataset Distribution", fontsize=14, fontweight="bold")
+fig.suptitle("Project Harvextro: Dataset Health Check", fontsize=14, fontweight="bold")
 
-# class bar chart
-colors = ["#2d8a4e", "#c0392b", "#f1c40f"]
-axes[0].bar(CLASSES, class_counts.values(), color=colors, edgecolor="white", linewidth=1.5)
-axes[0].set_title("Annotations per Class")
+# Class distribution chart (Professional Color Coding)
+colors = ["#2d8a4e", "#c0392b", "#f1c40f"] # Green, Red, Yellow hex codes
+axes[0].bar(CLASSES, class_counts.values(), color=colors, edgecolor="black", linewidth=1)
+axes[0].set_title("Annotations per Ripness Class")
 axes[0].set_ylabel("Count")
+
+# Add value labels on top of bars
 for i, v in enumerate(class_counts.values()):
     axes[0].text(i, v + 1, str(v), ha="center", fontweight="bold")
 
-# bbox aspect ratio distribution
+# Bounding box aspect ratio distribution
 axes[1].hist(wh_ratios, bins=30, color="#3498db", edgecolor="white", linewidth=0.8)
-axes[1].set_title("Bounding Box Width/Height Ratio")
-axes[1].set_xlabel("w / h")
+axes[1].set_title("Chili Shape Distribution (W/H Ratio)")
+axes[1].set_xlabel("Width / Height Ratio")
 axes[1].set_ylabel("Frequency")
-axes[1].axvline(1.0, color="red", linestyle="--", label="Square")
+axes[1].axvline(1.0, color="red", linestyle="--", label="Square Shape")
 axes[1].legend()
 
 plt.tight_layout()
 plt.savefig(f"{OUTPUT_ROOT}/eda_distribution.png", dpi=150, bbox_inches="tight")
 plt.show()
-print(f"Total annotations: {sum(class_counts.values())}")
+
+print(f"✅ EDA Complete. Total Scotch Bonnet annotations: {sum(class_counts.values())}")
