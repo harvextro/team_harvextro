@@ -5,3 +5,14 @@ OUTPUT_ROOT  = "/kaggle/working/harvextro_yolov8"
 
 # Define ripeness classes
 CLASSES = ["green_chili", "red_chili", "yellow_chili"]  # must match _classes.txt order
+
+# 2.2 CREATE DIRECTORY ARCHITECTURE
+# Recursively create folders for each split and sub-category
+for split in ["train", "valid", "test"]:
+    for sub in ["images", "labels"]:
+        Path(f"{OUTPUT_ROOT}/{split}/{sub}").mkdir(parents=True, exist_ok=True)
+
+print("✅ Output directories ready")
+print(f"   {OUTPUT_ROOT}/")
+for s in ["train","valid","test"]:
+    print(f"   ├─ {s}/images/  &  {s}/labels/")
