@@ -1,0 +1,45 @@
+# ─── ANNOTATION FORMAT CONVERTER ────────────────────────────────
+
+def convert_annotation(txt_path: str, img_path: str, out_path: str) -> int:
+    """
+    Normalizes pixel coordinates to YOLOv8 format (0.0 to 1.0).
+    Input:  x1, y1, x2, y2 (Pixels)
+    Output: class_id, cx, cy, w, h (Normalized)
+    """    
+    try:
+        img = Image.open(img_path)
+        W, H = img.size
+    except Exception:
+        return 0
+
+    lines_out = []
+    with open(txt_path) as f:
+        for line in f:
+            line = line.strip()         
+            if not line:
+
+                continue
+                
+            parts = line.split()
+            # last token is coords; first token may be filename
+            coords_str = parts[-1] if len(parts) > 1 else parts[0]
+            
+            if coords_str.endswith(".jpg") or coords_str.endswith(".png"):
+                continue                 # line is filename only, skip
+            try:
+                x1, y1, x2, y2, cls = map(int, coords_str.split(","))
+            except ValueError as e:
+                print(f"  \u26a0\ufe0f  Parse error in {txt_path}: {repr(coords_str)} \u2192 {e}")
+                continue
+                
+            # PERFORM NORMALIZATION    
+            cx = ((x1 + x2) / 2) / W
+            cy = ((y1 + y2) / 2) / H
+            bw = (x2 - x1) / W
+            bh = (y2 - y1) / H
+            
+            lines_out.append(f"{cls} {cx:.6f} {cy:.6f} {bw:.6f} {bh:.6f}")
+
+    with open(out_path, "w") as f:
+        f.write("\n".join(lines_out))
+    return len(lines_out)
