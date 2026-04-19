@@ -1,0 +1,7 @@
+# 2. EXECUTE CLEANUP
+for f in files_to_delete:
+    if os.path.exists(f):
+        os.remove(f)
+        print(f"🗑️  Deleted {f}")
+
+print("✨ Environment reset. Ready for a clean start.")
