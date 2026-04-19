@@ -1,0 +1,10 @@
+# ─── EXPORT TRAINING STATS ──────────────────────────────────────
+# Explicitly define where the results are (based on our RUN_NAME)
+training_run_path = Path(OUTPUT_ROOT) / "runs" / RUN_NAME
+results_source = training_run_path / 'results.csv'
+results_destination = '/kaggle/working/harvextro_final_results.csv'
+
+if results_source.exists():
+    # 1. Load to verify the data
+    df = pd.read_csv(results_source)
+    print(f"✅ Success! Training logs found for {len(df)} epochs.")
