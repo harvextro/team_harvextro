@@ -45,3 +45,13 @@ if test_images:
         project = f"{OUTPUT_ROOT}/runs",
         name    = f"{RUN_NAME}_predict",
     )
+
+ # Show a sample result
+    sample_res = results_list[0].plot()
+    plt.figure(figsize=(10, 6))
+    plt.imshow(cv2.cvtColor(sample_res, cv2.COLOR_BGR2RGB))
+    plt.title("Harvextro: Sample Test Detection")
+    plt.axis('off')
+    plt.show()
+else:
+    print("⚠️ No test images found in the directory!")
