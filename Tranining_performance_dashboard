@@ -50,3 +50,23 @@ if results_csv.exists():
 else:
     print(f"⚠️ Error: results.csv not found at {results_csv}. Please verify your RUN_NAME.")
 
+
+# ─── 2. SAMPLE PREDICTIONS VISUAL GRID ────────────────────────────
+# This section creates a visual gallery of detections on the test set
+# using custom colors to represent the Green, Red, and Yellow stages.
+
+# Mapping class names to specific UI colors
+CLASS_COLORS = {
+    "green_chili": "#27ae60",  # Green
+    "red_chili": "#e74c3c",    # Red
+    "yellow_chili": "#f39c12"  # Yellow/Orange
+}
+
+fig, axes = plt.subplots(2, 4, figsize=(18, 9))
+fig.suptitle("Final Model Predictions — HarveXtro YOLOv8", fontsize=14, fontweight="bold")
+
+# Zip together the subplots, the prediction results, and the image paths
+for ax, r, img_path in zip(axes.flat, results_list, test_images):
+    # Load and draw the raw image
+    img = np.array(Image.open(img_path).convert("RGB"))
+    ax.imshow(img)
