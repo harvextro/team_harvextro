@@ -70,3 +70,28 @@ for ax, r, img_path in zip(axes.flat, results_list, test_images):
     # Load and draw the raw image
     img = np.array(Image.open(img_path).convert("RGB"))
     ax.imshow(img)
+
+    # Process each bounding box detected in the image
+    for box in r.boxes:
+        cls_id = int(box.cls)
+        conf   = float(box.conf)
+        label  = CLASSES[cls_id]
+        color  = CLASS_COLORS.get(label, "#ffffff") # Default to white
+        
+        # Get corner coordinates
+        x1, y1, x2, y2 = box.xyxy[0].tolist()
+        
+        # Draw the rectangle
+        rect = patches.Rectangle((x1, y1), x2-x1, y2-y1,
+                                 linewidth=2, edgecolor=color, facecolor="none")
+        ax.add_patch(rect)
+        
+        # Draw the label text with a background box for clarity
+        ax.text(x1, y1-12, f"{label} {conf:.0%}",
+                color="white", fontsize=8, fontweight="bold",
+                bbox=dict(facecolor=color, alpha=0.8, pad=2, edgecolor="none"))
+    
+    ax.axis("off")
+    ax.set_title(Path(img_path).name, fontsize=9)
+
+plt.tight_layout(rect=[0, 0.03, 1, 0.95])
