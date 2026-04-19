@@ -1,0 +1,5 @@
+# 2. CLEAN BASE WEIGHTS
+# Ensures the model re-downloads a fresh version of the YOLOv8 Nano weights
+if os.path.exists("yolov8n.pt"):
+    os.remove("yolov8n.pt")
+    print("🗑️  Deleted yolov8n.pt to ensure a clean start.")
