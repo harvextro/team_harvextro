@@ -1,0 +1,16 @@
+# ─── TRAINING CONFIGURATION ─────────────────────────────────────
+# Configuration constants for easier experimentation
+MODEL_SIZE   = "n"      # n=nano (fastest), s=small (more accurate)
+EPOCHS       = 100
+BATCH_SIZE   = 16      # Decrease to 8 if you get an "Out of Memory" (OOM) error
+IMG_SIZE     = 416     # Resolution the model will see
+LR0          = 0.01    # Starting learning rate
+PATIENCE     = 20      # Early stopping: stop training if no improvement for 20 epochs
+PROJECT_NAME = "harvextro"
+RUN_NAME     = f"yolov8{MODEL_SIZE}_ep{EPOCHS}"
+
+# Log configuration for verification
+print(f"🚀 Project   : {PROJECT_NAME}")
+print(f"📦 Model     : YOLOv8{MODEL_SIZE}")
+print(f"⏳ Epochs    : {EPOCHS} | Batch: {BATCH_SIZE} | ImgSz: {IMG_SIZE}")
+print(f"🏷️  Classes   : {CLASSES}")
