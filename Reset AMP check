@@ -1,0 +1,10 @@
+!ls /kaggle/working/harvextro_yolov8/
+
+# 1. RESET AMP CHECK
+# This file is often the cause of 'PytorchStreamReader' errors
+amp_check_file = "yolo26n.pt" 
+
+if os.path.exists(amp_check_file):
+    os.remove(amp_check_file)
+    print(f"🗑️  Deleted {amp_check_file} to reset the AMP check.")
+
