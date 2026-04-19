@@ -13,4 +13,11 @@ results = model.train(
     # This stops it from over-confidently picking Red when it might be Yellow.
     label_smoothing=0.1, 
     
-  
+    # 2. Adjusting HSV (Color) Augmentation:
+    # We lower these slightly so the model doesn't get confused by 
+    # fake colors created during training.
+    hsv_h=0.015, # Slight hue shift
+    hsv_s=0.4,   # Don't make the yellow too saturated (which looks red)
+    hsv_v=0.3,   # Keep brightness realistic
+    
+
