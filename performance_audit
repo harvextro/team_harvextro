@@ -1,0 +1,5 @@
+# ─── HARVEXTRO PERFORMANCE AUDIT: CLASS & SYSTEM TOTALS ─────────
+
+print("═" * 45)
+print(f"{'CATEGORY':<15} | {'PRECISION':<10} | {'RECALL':<10} | {'F1'}")
+print("─" * 45)
