@@ -6,3 +6,5 @@ if weight_files:
     latest_weights = str(weight_files[-1])
     print(f"✅ Found weights at: {latest_weights}")
     
+ # 2. Load the model using the discovered path
+    model = YOLO(latest_weights)
