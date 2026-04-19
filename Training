@@ -1,0 +1,13 @@
+# ─── TRAINING CONFIGURATION ─────────────────────────────────────
+MODEL_SIZE   = "n"      # n=nano  s=small  m=medium  l=large  x=xlarge
+EPOCHS       = 100
+BATCH_SIZE   = 16      # reduce to 8 if OOM
+IMG_SIZE     = 416     # keep consistent with dataset preprocessing
+LR0          = 0.01
+PATIENCE     = 20      # early stopping
+PROJECT_NAME = "harvextro"
+RUN_NAME     = f"yolov8{MODEL_SIZE}_ep{EPOCHS}"
+
+print(f"Model    : YOLOv8{MODEL_SIZE}")
+print(f"Epochs   : {EPOCHS}   Batch: {BATCH_SIZE}   ImgSz: {IMG_SIZE}")
+print(f"Classes  : {CLASSES}")
