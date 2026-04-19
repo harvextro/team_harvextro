@@ -11,19 +11,20 @@ from pathlib import Path
 from PIL import Image
 from tqdm.auto import tqdm
 import torch
+import cv2
+import shutil
+from IPython.display import display
+import glob
 
-# VUerify GP
-import torch
+# Verify PyTorch and CUDA
 print(f"PyTorch  : {torch.__version__}")
 print(f"CUDA     : {torch.cuda.is_available()}")
-if torch.cuda.is_available():
-    print(f"GPU      : {torch.cuda.get_device_name(0)}")
 
 import ultralytics
 from ultralytics import YOLO
 ultralytics.checks()
 
-# Verify GPU and set device variable
+# Set global device variable for the pipeline
 device = "0" if torch.cuda.is_available() else "cpu"
 print(f"Using Device: {device}")
 if torch.cuda.is_available():
