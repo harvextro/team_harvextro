@@ -12,4 +12,19 @@ from PIL import Image
 from tqdm.auto import tqdm
 import torch
 
+# VUerify GP
+import torch
+print(f"PyTorch  : {torch.__version__}")
+print(f"CUDA     : {torch.cuda.is_available()}")
+if torch.cuda.is_available():
+    print(f"GPU      : {torch.cuda.get_device_name(0)}")
 
+import ultralytics
+from ultralytics import YOLO
+ultralytics.checks()
+
+# Verify GPU and set device variable
+device = "0" if torch.cuda.is_available() else "cpu"
+print(f"Using Device: {device}")
+if torch.cuda.is_available():
+    print(f"GPU Name: {torch.cuda.get_device_name(0)}")
