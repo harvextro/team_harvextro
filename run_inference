@@ -3,3 +3,11 @@
 model_path = '/kaggle/working/harvextro_yolov8/runs/harvextro_final_v1-2/weights/best.pt'
 image_folder = '/kaggle/input/datasets/dilniwijesinghe/scotchbonnet-chilli/Data_Set/test/*.jpg'
 
+# 2. LOAD MODEL WITH ERROR HANDLING
+if os.path.exists(model_path):
+    model = YOLO(model_path)
+    print("✅ Model loaded successfully.")
+else:
+    print(f"❌ Error: Model not found at {model_path}")
+    # Tip: Run !ls /kaggle/working/harvextro_yolov8/runs/ to find your folder name
+    model = None
