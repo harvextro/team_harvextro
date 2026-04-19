@@ -1,0 +1,16 @@
+# Load the file we just exported in the previous step
+results_path = '/kaggle/working/harvextro_final_results.csv'
+
+if os.path.exists(results_path):
+    results = pd.read_csv(results_path)
+    
+    # --- PLOT 1: LOSS (Precision of the Bounding Box) ---
+    plt.figure(figsize=(8, 5))
+    plt.plot(results['train/box_loss'], label='Train Box Loss', color='#3498db')
+    plt.plot(results['val/box_loss'], label='Val Box Loss', color='#e74c3c', linestyle='--')
+    plt.legend()
+    plt.title("Harvextro: Box Loss (Lower is Better)")
+    plt.xlabel("Epochs")
+    plt.ylabel("Loss")
+    plt.grid(alpha=0.2)
+    plt.show()
