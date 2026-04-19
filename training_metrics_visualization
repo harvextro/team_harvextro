@@ -14,3 +14,16 @@ if os.path.exists(results_path):
     plt.ylabel("Loss")
     plt.grid(alpha=0.2)
     plt.show()
+
+    # --- PLOT 2: mAP (Overall Detection Accuracy) ---
+    plt.figure(figsize=(8, 5))
+    plt.plot(results['metrics/mAP50(B)'], label='mAP@0.5', color='#2ecc71', linewidth=2)
+    plt.plot(results['metrics/mAP50-95(B)'], label='mAP@0.5:0.95', color='#27ae60', linestyle=':')
+    plt.legend()
+    plt.title("Harvextro: Detection Accuracy (Higher is Better)")
+    plt.xlabel("Epochs")
+    plt.ylabel("Score")
+    plt.grid(alpha=0.2)
+    plt.show()
+else:
+    print("CSV not found. Run the Export cell first!")
