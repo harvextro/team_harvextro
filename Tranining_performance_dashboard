@@ -95,3 +95,8 @@ for ax, r, img_path in zip(axes.flat, results_list, test_images):
     ax.set_title(Path(img_path).name, fontsize=9)
 
 plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+
+# Save the grid as a file for your presentation
+plt.savefig(f"{OUTPUT_ROOT}/sample_predictions.png", dpi=150, bbox_inches="tight")
+plt.show()
+print(f"✅ Prediction grid saved as: {OUTPUT_ROOT}/sample_predictions.png")
