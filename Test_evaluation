@@ -1,0 +1,12 @@
+# 1. DIRECT PATH TO YOUR MODEL (No more NameErrors!)
+# We are using the v1-2 path you provided
+model_path = '/kaggle/working/harvextro_yolov8/runs/harvextro_final_v1-2/weights/best.pt'
+best_model = YOLO(model_path)
+
+# 2. DEFINE NECESSARY VARIABLES
+# Make sure these paths match your HarveXtro project folder
+OUTPUT_ROOT = "/kaggle/working/harvextro_yolov8"
+yaml_path = f"{OUTPUT_ROOT}/dataset.yaml"
+RUN_NAME = "harvextro_final_v1_2" # Name for this evaluation run
+IMG_SIZE = 640 
+CLASSES = ['green_chili', 'red_chili', 'yellow_chili']
