@@ -1,0 +1,10 @@
+# 1. LOAD THE WEIGHTS FROM YOUR NEW COMPLEX RUN
+# We point directly to the 'harvextro_final_v1' folder
+model_path = "/kaggle/working/harvextro_yolov8/runs/harvextro_final_v1/weights/best.pt"
+
+try:
+    model = YOLO(model_path)
+    print("✅ Successfully loaded the complex model!")
+except Exception as e:
+    print(f"❌ Still can't find the file. Error: {e}")
+    print("Tip: Check the 'Data' tab on the right to see the exact folder name.")
