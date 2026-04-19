@@ -13,3 +13,40 @@ if results_csv.exists():
 
     fig, axes = plt.subplots(2, 3, figsize=(16, 9))
     fig.suptitle("YOLOv8 Training Dashboard — HarveXtro", fontsize=15, fontweight="bold")
+
+ # Define the primary metrics for the Scotch Bonnet detection task
+    METRIC_COLS = [
+        ("train/box_loss", "val/box_loss", "Box Loss (Localization)"),
+        ("train/cls_loss", "val/cls_loss", "Class Loss (Accuracy)"),
+        ("train/dfl_loss", "val/dfl_loss", "DFL Loss (Boundary)"),
+        ("metrics/mAP50(B)",   None, "mAP@0.50 (Overall Score)"),
+        ("metrics/mAP50-95(B)",None, "mAP@0.50:0.95 (Strict Score)"),
+        ("metrics/precision(B)","metrics/recall(B)", "Precision vs Recall"),
+    ]
+
+    # Professional color scheme: Blue (Train), Red (Validation), Green (Alt)
+    palette = {"train": "#3498db", "val": "#e74c3c", "alt": "#2ecc71"}
+
+    for ax, (col_a, col_b, title) in zip(axes.flat, METRIC_COLS):
+        if col_a in df.columns:
+            ax.plot(df[col_a], label=col_a.split("/")[-1].replace("(B)",""),
+                    color=palette["train"], linewidth=2)
+        if col_b and col_b in df.columns:
+            ax.plot(df[col_b], label=col_b.split("/")[-1].replace("(B)",""),
+                    color=palette["val"] if "val" in col_b else palette["alt"],
+                    linewidth=2, linestyle="--")
+        
+        ax.set_title(title, fontweight="bold", fontsize=10)
+        ax.set_xlabel("Epoch")
+        ax.legend(fontsize=8)
+        ax.grid(alpha=0.3)
+
+    plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+    
+    # Save the dashboard as a file for your project report
+    plt.savefig(f"{OUTPUT_ROOT}/training_dashboard.png", dpi=150, bbox_inches="tight")
+    plt.show()
+    print(f"✅ Dashboard saved as: {OUTPUT_ROOT}/training_dashboard.png")
+else:
+    print(f"⚠️ Error: results.csv not found at {results_csv}. Please verify your RUN_NAME.")
+
