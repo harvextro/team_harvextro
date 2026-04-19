@@ -1,23 +1,18 @@
-# Install all dependencies
-!pip install ultralytics tensorflow opencv-python matplotlib seaborn pandas pillow pyyaml tqdm --quiet
+# ─── CONFIGURE PATHS ────────────────────────────────────────────
+# Define source and destination paths
+DATASET_ROOT = "/kaggle/input/datasets/dilniwijesinghe/scotchbonnet-chilli/Data_Set"
+OUTPUT_ROOT  = "/kaggle/working/harvextro_yolov8"
 
-import os, sys, shutil, glob, random, yaml, json
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-import seaborn as sns
-from pathlib import Path
-from PIL import Image
-from tqdm.auto import tqdm
+# Define ripeness classes
+CLASSES = ["green_chili", "red_chili", "yellow_chili"]  # must match _classes.txt order
 
-# VUerify GP
-import torch
-print(f"PyTorch  : {torch.__version__}")
-print(f"CUDA     : {torch.cuda.is_available()}")
-if torch.cuda.is_available():
-    print(f"GPU      : {torch.cuda.get_device_name(0)}")
+# 2.2 CREATE DIRECTORY ARCHITECTURE
+# Recursively create folders for each split and sub-category
+for split in ["train", "valid", "test"]:
+    for sub in ["images", "labels"]:
+        Path(f"{OUTPUT_ROOT}/{split}/{sub}").mkdir(parents=True, exist_ok=True)
 
-import ultralytics
-from ultralytics import YOLO
-ultralytics.checks()
+print("✅ Output directories ready")
+print(f"   {OUTPUT_ROOT}/")
+for s in ["train","valid","test"]:
+    print(f"   ├─ {s}/images/  &  {s}/labels/")
