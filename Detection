@@ -27,4 +27,10 @@ for img_path in test_images:
     res_plotted = results[0].plot()
     res_rgb = cv2.cvtColor(res_plotted, cv2.COLOR_BGR2RGB)
 
+# Display results
+    plt.figure(figsize=(10, 6))
+    plt.imshow(res_rgb)
+    plt.title(f"Harvextro Complex Detection: {Path(img_path).name}")
+    plt.axis('off')
+    plt.show()
 
