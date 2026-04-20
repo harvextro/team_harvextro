@@ -8,5 +8,10 @@ if os.path.exists(best_cm_path):
     # 2. Use the Image function correctly
     display(Image(filename=best_cm_path, width=800))
     
-
+    # 3. Copy to root for download
+    shutil.copy(best_cm_path, destination_path)
+    print(f"\n📂 File copied to: {destination_path}")
+    print("💡 Download 'final_confusion_matrix.png' from the Output sidebar now!")
+else:
+    print("❌ Error: Path not found. Run !find /kaggle/working/ -name 'confusion_matrix_normalized.png' again.")
 
