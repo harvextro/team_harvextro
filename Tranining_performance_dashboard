@@ -66,10 +66,9 @@ CLASS_COLORS = {
 fig, axes = plt.subplots(2, 4, figsize=(18, 9))
 fig.suptitle("Final Model Predictions — HarveXtro YOLOv8", fontsize=14, fontweight="bold")
 
-# Zip together the subplots, the prediction results, and the image paths
 for ax, r, img_path in zip(axes.flat, results_list, test_images):
-    # Load and draw the raw image
-    img = np.array(Image.open(img_path).convert("RGB"))
+    # Use the nickname PILImage instead of just Image
+    img = np.array(PILImage.open(img_path).convert("RGB")) 
     ax.imshow(img)
 
     # Process each bounding box detected in the image
