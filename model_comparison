@@ -14,8 +14,23 @@ results_s = model_s.train(
     imgsz=640, 
     name='harvextro_v8s_comparison'
 )
+
 # 3. Validate and extract metrics
 metrics_s = model_s.val()
 map_s = metrics_s.box.map50
+
+# 4. Compare with your previous Nano results
+# (Assuming your previous Nano mAP was ~0.9489)
+map_n = 0.9489 
+
+print("\n" + "="*45)
+print("       HARVEXTRO MODEL ARCHITECTURE EVALUATION")
+print("="*45)
+print(f"{'Metric':<20} | {'YOLOv8 Nano':<12} | {'YOLOv8 Small':<12}")
+print("-"*45)
+print(f"{'Mean AP @50':<20} | {map_n:<12.4f} | {map_s:<12.4f}")
+print(f"{'Model Size':<20} | {'~6.0 MB':<12} | {'~22.0 MB':<12}")
+print(f"{'Parameters':<20} | {'3.2M':<12} | {'11.1M':<12}")
+print("="*45)
 
 
