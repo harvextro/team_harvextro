@@ -1,18 +1,7 @@
-# ─── CONFUSION MATRIX (ENHANCED VIEW) ───────────────────────────
+# 1. Path to your best training matrix
+best_cm_path = '/kaggle/working/harvextro_yolov8/runs/harvextro_final_v1/confusion_matrix_normalized.png'
+destination_path = '/kaggle/working/final_confusion_matrix.png'
 
-# This points to the folder created by your best_model.val() step
-eval_dir = Path(f"{OUTPUT_ROOT}/runs/{RUN_NAME}_eval")
-cm_img = list(eval_dir.glob("*confusion_matrix_normalized.png")) # 'Normalized' is better for reports
+if os.path.exists(best_cm_path):
+    print("✅ Displaying HarveXtro Final Confusion Matrix:")
 
-if cm_img:
-    print(f"✅ Found Matrix: {cm_img[0].name}")
-    img = Image.open(cm_img[0])
-    
-    # Make the display a bit larger for your report screenshot
-    plt.figure(figsize=(12, 10))
-    plt.imshow(img)
-    plt.axis('off')
-    plt.title("HarveXtro Ripeness Confusion Matrix", fontsize=14, fontweight='bold')
-    plt.show()
-else:
-    print("⚠️ Matrix image not found. Ensure you ran 'best_model.val()' first!")
