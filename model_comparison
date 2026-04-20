@@ -5,3 +5,14 @@ yaml_path = '/kaggle/working/harvextro_yolov8/dataset.yaml'
 epochs_to_test = 10  # Short run to compare learning speed
 
 print("🚀 Starting Comparison Experiment: HarveXtro YOLOv8s")
+
+# 2. Train the "Small" (v8s) Model
+model_s = YOLO('yolov8s.pt')
+results_s = model_s.train(
+    data=yaml_path, 
+    epochs=epochs_to_test, 
+    imgsz=640, 
+    name='harvextro_v8s_comparison'
+)
+
+
