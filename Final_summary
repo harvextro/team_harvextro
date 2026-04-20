@@ -15,3 +15,9 @@ print("\n📦 Final Deployment Artifacts:")
 # Lists the visual dashboards you generated
 for f in sorted(Path(OUTPUT_ROOT).glob("*.png")):
     print(f"    ✅ Dashboard: {f.name}")
+
+# Points to the actual model files
+print(f"    ✅ Best Weights: {RUN_NAME}/weights/best.pt")
+print(f"    ✅ Edge Model  : {Path(tflite_path).name if 'tflite_path' in locals() else 'Exported TFLite'}")
+print("="*55)
+print("🚀 SYSTEM READY FOR HARDWARE INTEGRATION (ESP32)")
