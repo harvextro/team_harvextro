@@ -5,3 +5,8 @@ destination_path = '/kaggle/working/final_confusion_matrix.png'
 if os.path.exists(best_cm_path):
     print("✅ Displaying HarveXtro Final Confusion Matrix:")
 
+    # 2. Use the Image function correctly
+    display(Image(filename=best_cm_path, width=800))
+    
+
+
