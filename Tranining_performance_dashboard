@@ -85,7 +85,7 @@ for ax, r, img_path in zip(axes.flat, results_list, test_images):
         rect = patches.Rectangle((x1, y1), x2-x1, y2-y1,
                                  linewidth=2, edgecolor=color, facecolor="none")
         ax.add_patch(rect)
-        
+
         # Draw the label text with a background box for clarity
         ax.text(x1, y1-12, f"{label} {conf:.0%}",
                 color="white", fontsize=8, fontweight="bold",
