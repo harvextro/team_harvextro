@@ -12,3 +12,12 @@ if results_source.exists():
     # 2. Copy to the root for easy download from the Kaggle sidebar
     shutil.copy(results_source, results_destination)
     print(f"📂 Stats exported to: {results_destination}")
+
+    # 3. Preview the final metrics
+    print("\n--- Final Epoch Summary ---")
+    # Using column name matching to avoid index errors
+    cols = [c for c in df.columns if 'mAP50(B)' in c or 'precision(B)' in c or 'recall(B)' in c]
+    print(df.tail(1)[cols])
+else:
+    print(f"❌ CSV not found at {results_source}")
+    print("Tip: Run !ls /kaggle/working/harvextro_yolov8/runs/ to see your folder names.")
