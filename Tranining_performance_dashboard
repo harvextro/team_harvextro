@@ -30,6 +30,7 @@ if results_csv.exists():
     for ax, (col_a, col_b, title) in zip(axes.flat, METRIC_COLS):
         if col_a in df.columns:
             ax.plot(df[col_a], label=col_a.split("/")[-1].replace("(B)",""),
+
                     color=palette["train"], linewidth=2)
         if col_b and col_b in df.columns:
             ax.plot(df[col_b], label=col_b.split("/")[-1].replace("(B)",""),
