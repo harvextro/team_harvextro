@@ -14,5 +14,8 @@ results_s = model_s.train(
     imgsz=640, 
     name='harvextro_v8s_comparison'
 )
+# 3. Validate and extract metrics
+metrics_s = model_s.val()
+map_s = metrics_s.box.map50
 
 
