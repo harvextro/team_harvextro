@@ -1,0 +1,7 @@
+# ─── MODEL COMPARISON: YOLOv8 NANO VS. YOLOv8 SMALL ────────────
+
+# 1. Configuration
+yaml_path = '/kaggle/working/harvextro_yolov8/dataset.yaml'
+epochs_to_test = 10  # Short run to compare learning speed
+
+print("🚀 Starting Comparison Experiment: HarveXtro YOLOv8s")
