@@ -33,4 +33,9 @@ print(f"{'Model Size':<20} | {'~6.0 MB':<12} | {'~22.0 MB':<12}")
 print(f"{'Parameters':<20} | {'3.2M':<12} | {'11.1M':<12}")
 print("="*45)
 
+# 5. Engineering Conclusion
+if map_s > map_n + 0.02:
+    print("💡 CONCLUSION: The 'Small' model is significantly more accurate. Recommended for high-power laptops.")
+else:
+    print("💡 CONCLUSION: The 'Nano' model provides similar accuracy with better speed. Recommended for your ESP32/Laptop setup.")
 
