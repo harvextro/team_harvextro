@@ -2,3 +2,9 @@
 training_run_path = Path("/kaggle/working/harvextro_yolov8/runs/harvextro_final_v1")
 results_source = training_run_path / 'results.csv'
 results_destination = '/kaggle/working/harvextro_final_results.csv'
+
+if results_source.exists():
+    # 1. Load to verify the data
+    df = pd.read_csv(results_source)
+    df.columns = df.columns.str.strip() # Clean column names
+    print(f"✅ Success! Training logs found for {len(df)} epochs.")
